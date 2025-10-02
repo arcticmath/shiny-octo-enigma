@@ -141,14 +141,11 @@
             e.preventDefault();
             let url = document.getElementById('urlInput').value.trim();
             
-            // Add https:// if no protocol specified
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                url = 'https://' + url;
-            }
+            // Base64 encode the URL
+            let encodedUrl = btoa(url);
             
-            // Redirect to proxy with the URL
-            // Change '/service/' to match your proxy's endpoint
-            window.location.href = '/mastery?auth=' + encodeURIComponent(url);
+            // Redirect to your proxy with the login parameter
+            window.location.href = '/?login=' + encodedUrl;
         }
     </script>
 </body>
