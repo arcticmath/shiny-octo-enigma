@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Proxy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #1a1a1a;
+            border: 2px solid #2a2a2a;
+            padding: 16px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4a9eff;
+        }
+
+        input[type="text"]::placeholder {
+            color: #555;
+        }
+
+        button {
+            background: #4a9eff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #3a8eef;
+        }
+
+        .info {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .info h3 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .info p {
+            color: #888;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Web Proxy</h1>
+        <p class="subtitle">Enter any URL to browse anonymously</p>
+        
+        <form onsubmit="handleSubmit(event)">
+            <input 
+                type="text" 
+                id="urlInput" 
+                placeholder="https://example.com" 
+                required
+                autocomplete="off"
+            >
+            <button type="submit">Go</button>
+        </form>
+
+        <div class="info">
+            <h3>How it works</h3>
+            <p>Enter any website URL and click Go. The proxy will load the site through a secure connection, allowing you to browse anonymously.</p>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            let url = document.getElementById('urlInput').value.trim();
+            
+            // Add https:// if no protocol specified
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            
+            // Redirect to proxy with the URL
+            // Change '/service/' to match your proxy's endpoint
+            window.location.href = '/service/' + encodeURIComponent(url);
+        }
+    </script>
+</body>
+</html>
